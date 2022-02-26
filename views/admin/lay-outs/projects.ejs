@@ -1,0 +1,32 @@
+<div class="projects forms d-none" id="projects">
+    <ul class="list-group">
+        <h4>المشاريع</h4>
+        <form action="/admin/home/add-project" id="add-project-form" method="post">
+            <h4>اضف مشروع</h4>
+            <div class="mb-3">
+                <label class="form-label">العنوان</label>
+                <textarea class="form-control" placeholder="العنوان" id="floatingTextarea" name="title"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">المحتوى</label>
+                <textarea class="form-control" placeholder="المحتوى" id="floatingTextarea" name="content"></textarea>
+            </div>
+            <input type="hidden" id="hide">
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+        <% if(projects){ %>
+            <% projects.forEach( p=> { %>
+                <li class="list-group-item">
+                    <h6>
+                        <%= p.title%>
+                    </h6>
+                    <form action="/admin/home/delelte-project/<%=p._id%>" method="post"><button type="button"
+                            class="btn btn-danger" onclick="deleteHandeler(this)">حذف</button></form>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=p._id%>">
+                        تعديل</button>
+                    <%- include('projects-modal', {p:p})%>
+                </li>
+                <%})%>
+                    <%}%>
+    </ul>
+</div>

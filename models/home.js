@@ -10,7 +10,7 @@ const homeSchema = mongoose.Schema({
     content: String,
     img: String,
   },
-  chooseus: [
+  projects: [
     {
       title: String,
       content: String,
@@ -20,38 +20,27 @@ const homeSchema = mongoose.Schema({
     {
       title: String,
       content: String,
-      details: {
-        imgH: String,
-        imgS: String,
-        Facility: [String],
-        faq: [
-          {
-            question: String,
-            answer: String,
-          },
-        ],
-        brochures: [String],
-      },
     },
   ],
-  logistics: [
+  throwserv: [
     {
       title: String,
       content: String,
       img: String,
-      details: {
-        imgH: String,
-        imgS: String,
-        Facility: [String],
-        faq: [
-          {
-            question: String,
-            answer: String,
-          },
-        ],
-        brochures: [String],
-      },
     },
   ],
-  projects: [],
+  clints: [String],
+  portfilo: [{ title: String, content: String, img: String }],
+  whyus: {
+    mession: String,
+    vision: String,
+    princ: String,
+  },
+  techs: [
+    {
+      title: String,
+    },
+  ],
 });
+
+module.exports = mongoose.model("Home", homeSchema);

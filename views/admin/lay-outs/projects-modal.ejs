@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="id<%=p._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <%= p.title%>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/home/edit-project/<%=p._id%>" id="add-project-form" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">العنوان</label>
+                        <textarea class="form-control" placeholder="العنوان" id="floatingTextarea"
+                            name="title"><%= p.title%></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">المحتوى</label>
+                        <textarea class="form-control" placeholder="المحتوى" id="floatingTextarea"
+                            name="content"><%= p.content %></textarea>
+                    </div>
+                    <input type="hidden" id="hide">
+                    <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

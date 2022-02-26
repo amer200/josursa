@@ -1,0 +1,15 @@
+<form action="/admin/home/header" id="header-form" method="post" class="forms d-block">
+    <h4>header</h4>
+    <div class="mb-3">
+        <label class="form-label">النص الاول</label>
+        <textarea class="form-control" placeholder="النص الاول" id="floatingTextarea"
+            name="main"> <%= headerMain %></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">النص الثاني</label>
+        <textarea class="form-control" placeholder="النص الثاني" id="floatingTextarea"
+            name="sub"> <%= headerSub %></textarea>
+    </div>
+    <input type="hidden" id="hide">
+    <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+</form>

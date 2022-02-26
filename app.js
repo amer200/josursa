@@ -4,6 +4,13 @@ const app = express();
 const { default: mongoose } = require("mongoose");
 const port = process.env.PORT;
 
+app.use(express.urlencoded({ extended: true }));
+app.use('/', express.static("public"));
+app.set("view engine", "ejs");
+
+// routes
+const adminRoutes = require("./routes/admin");
+app.use("/admin", adminRoutes);
 mongoose
   .connect(process.env.DB_URL)
   .then((result) => {
