@@ -50,6 +50,28 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="#services" onclick="formsHandler('servs')">الخدمات</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#throw-services" onclick="formsHandler('th-servs')">من خلال
+                    خدماتنا</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#clints" onclick="formsHandler('clints')">العملاء</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#portfillo" onclick="formsHandler('portfillo')">معرض المشاريع
+                    المميزة</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#why-us" onclick="formsHandler('why-us')">لماذا نحن</a>
+                </li>
               </ul>
             </li>
             <li>
@@ -112,6 +134,11 @@
             <%- include('lay-outs/header-form')%>
               <%- include('lay-outs/about-form')%>
                 <%- include('lay-outs/projects')%>
+                  <%- include('lay-outs/servs') %>
+                    <%- include('lay-outs/throw-servs') %>
+                      <%- include('lay-outs/clints') %>
+                        <%- include('lay-outs/portfillo') %>
+                          <%- include('lay-outs/why-us') %>
           </div>
         </main>
       </div>

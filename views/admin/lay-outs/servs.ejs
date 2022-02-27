@@ -1,0 +1,32 @@
+<div class="servs forms d-none" id="servs">
+    <ul class="list-group">
+        <h4>الخدمات</h4>
+        <form action="/admin/home/add-serv" id="add-serv-form" method="post">
+            <h4>اضف خدمة</h4>
+            <div class="mb-3">
+                <label class="form-label">العنوان</label>
+                <textarea class="form-control" placeholder="العنوان" id="floatingTextarea" name="title"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">المحتوى</label>
+                <textarea class="form-control" placeholder="المحتوى" id="floatingTextarea" name="content"></textarea>
+            </div>
+            <input type="hidden" id="hide">
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+        <% if(servs){ %>
+            <% servs.forEach( s=> { %>
+                <li class="list-group-item">
+                    <h6>
+                        <%= s.title%>
+                    </h6>
+                    <form action="/admin/home/delelte-serv/<%=s._id%>" method="post"><button type="button"
+                            class="btn btn-danger" onclick="deleteHandeler(this)">حذف</button></form>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=s._id%>">
+                        تعديل</button>
+                    <%- include('servs-modal', {s:s})%>
+                </li>
+                <%})%>
+                    <%}%>
+    </ul>
+</div>

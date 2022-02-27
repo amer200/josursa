@@ -22,12 +22,28 @@
 
 .projects .btn-danger,
 .projects .btn-primary,
-.projects form {
+.projects form,
+.servs .btn-danger,
+.servs .btn-primary,
+.servs form {
     display: inline;
 }
 
-#add-project-form {
+#add-project-form,
+#add-serv-form,
+#add-throw-serv-form,
+#add-clint-form,
+#add-portfillo-form,
+#add-whyus-form {
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 3px solid #333;
+}
+
+#add-throw-serv-form img,
+#add-clint-form img,
+#edit-clint-form img,
+#edit-portfillo-form img {
+    width: 100%;
+    margin-bottom: 20px;
 }

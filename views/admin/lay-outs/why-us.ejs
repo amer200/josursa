@@ -1,0 +1,24 @@
+<div class="projects forms d-none" id="why-us">
+    <ul class="list-group">
+        <h4>لماذا نحن</h4>
+        <form action="/admin/home/whyus" id="add-whyus-form" method="post">
+            <div class="mb-3">
+                <label class="form-label">مهمتنا</label>
+                <textarea class="form-control" placeholder="مهمتنا" id="floatingTextarea"
+                    name="mession"><%= whyus.mession %></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">روئينا</label>
+                <textarea class="form-control" placeholder="روئينا" id="floatingTextarea"
+                    name="vision"><%= whyus.vision %></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">قيمنا</label>
+                <textarea class="form-control" placeholder="قيمنا" id="floatingTextarea"
+                    name="princ"><%= whyus.princ %></textarea>
+            </div>
+            <input type="hidden" id="hide">
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+    </ul>
+</div>

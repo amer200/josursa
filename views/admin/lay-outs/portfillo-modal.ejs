@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div class="modal fade" id="id<%=p._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <%= p.title%>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/home/edit-portfillo/<%=p._id%>" id="edit-portfillo-form" method="post">
+                    <h4>
+                        <%=p.title%>
+                    </h4>
+                    <div class="mb-3">
+                        <label class="form-label">الاسم</label>
+                        <input class="form-control" placeholder="الاسم" id="floatingTextarea" name="title"
+                            value="<%=p.title%>" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">المحتوى</label>
+                        <textarea class="form-control" placeholder="المحتوى" id="floatingTextarea"
+                            name="content"><%=p.content%></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">الصورة</label>
+                        <img src="<%= p.img%>" alt="">
+                        <input class="form-control" placeholder="رابط الصورة" id="floatingTextarea" name="img"
+                            value="<%= p.img%>" />
+                    </div>
+                    <input type="hidden" id="hide">
+                    <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

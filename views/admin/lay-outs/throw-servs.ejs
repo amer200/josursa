@@ -1,0 +1,36 @@
+<div class="servs forms d-none" id="th-servs">
+    <ul class="list-group">
+        <h4>من خلال خدماتنا</h4>
+        <form action="/admin/home/add-throw-serv" id="add-serv-form" method="post">
+            <h4>اضف خدمة</h4>
+            <div class="mb-3">
+                <label class="form-label">العنوان</label>
+                <textarea class="form-control" placeholder="العنوان" id="floatingTextarea" name="title"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">المحتوى</label>
+                <textarea class="form-control" placeholder="المحتوى" id="floatingTextarea" name="content"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">رابط الصورة</label>
+                <input class="form-control" placeholder="رابط الصورة" id="floatingTextarea" name="img" />
+            </div>
+            <input type="hidden" id="hide">
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+        <% if(throwservs){ %>
+            <% throwservs.forEach( s=> { %>
+                <li class="list-group-item">
+                    <h6>
+                        <%= s.title%>
+                    </h6>
+                    <form action="/admin/home/delelte-throw-serv/<%=s._id%>" method="post"><button type="button"
+                            class="btn btn-danger" onclick="deleteHandeler(this)">حذف</button></form>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=s._id%>">
+                        تعديل</button>
+                    <%- include('throw-servs-modal', {s:s})%>
+                </li>
+                <%})%>
+                    <%}%>
+    </ul>
+</div>

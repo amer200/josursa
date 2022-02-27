@@ -28,4 +28,14 @@ if (path == "header") {
   formsHandler("about-form");
 } else if (path == "projects") {
   formsHandler("projects");
+} else if (path == "services") {
+  formsHandler("services");
+} else if (path == "throw-services") {
+  formsHandler("th-servs");
+} else if (path == "clints") {
+  formsHandler("clints");
+} else if (path == "portfillo") {
+  formsHandler("portfillo");
+}else if(path == "why-us"){
+  formsHandler('why-us')
 }

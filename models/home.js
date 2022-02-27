@@ -22,14 +22,20 @@ const homeSchema = mongoose.Schema({
       content: String,
     },
   ],
-  throwserv: [
+  throwservs: [
     {
       title: String,
       content: String,
       img: String,
     },
   ],
-  clints: [String],
+  clints: [
+    {
+      name: String,
+      website: String,
+      img: String,
+    },
+  ],
   portfilo: [{ title: String, content: String, img: String }],
   whyus: {
     mession: String,

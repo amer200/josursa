@@ -11,6 +11,11 @@ exports.getHome = (req, res, next) => {
           aboutTitle: data.about.title,
           aboutContent: data.about.content,
           projects: data.projects,
+          servs: data.services,
+          throwservs: data.throwservs,
+          clints: data.clints,
+          portfillo: data.portfilo,
+          whyus: data.whyus,
         });
       } else {
         res.render("admin/admin", {
@@ -19,6 +24,15 @@ exports.getHome = (req, res, next) => {
           aboutTitle: "",
           aboutContent: "",
           projects: [],
+          servs: [],
+          throwservs: [],
+          clints: [],
+          portfillo: [],
+          whyus: {
+            mession: "",
+            vision: "",
+            princ: "",
+          },
         });
       }
     })
@@ -179,21 +193,221 @@ exports.editServ = (req, res, next) => {
       return data.save();
     })
     .then((result) => {
-      res.redirect("/admin/home#projects");
+      res.redirect("/admin/home#services");
     })
     .catch((err) => {
       res.send(err);
+    });
+};
+exports.addThrowServ = (req, res, next) => {
+  const title = req.body.title;
+  const content = req.body.content;
+  const img = req.body.img;
+  const newThrowServ = {
+    title: title,
+    content: content,
+    img: img,
+  };
+  Home.findOne()
+    .then((data) => {
+      data.throwservs.push(newThrowServ);
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#throw-services");
+    })
+    .catch((err) => {
+      res.status(500).send("inernal error !");
+      console.log(err);
+    });
+};
+exports.deletethrowServ = (req, res, next) => {
+  const id = req.params.id;
+  Home.findOne()
+    .then((data) => {
+      const newServ = data.throwservs.filter((p) => {
+        return p._id.toString() !== id;
+      });
+      data.throwservs = newServ;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#throw-services");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+exports.editThrowServ = (req, res, next) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const content = req.body.content;
+  const img = req.body.img;
+  Home.findOne()
+    .then((data) => {
+      const newThrowservices = edit(data.throwservs, id, title, content, img);
+      data.throwservs = newThrowservices;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#throw-services");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+exports.addClint = (req, res, next) => {
+  const name = req.body.name;
+  const website = req.body.website;
+  const img = req.body.img;
+  const newClint = {
+    name: name,
+    website: website,
+    img: img,
+  };
+  Home.findOne()
+    .then((data) => {
+      data.clints.push(newClint);
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#clints");
+    })
+    .catch((err) => {
+      res.status(500).send("inernal error !");
+      console.log(err);
+    });
+};
+exports.editClint = (req, res, next) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const website = req.body.website;
+  const img = req.body.img;
+  Home.findOne()
+    .then((data) => {
+      const newClint = edit(data.clints, id, 0, 0, img, name, website);
+      data.clints = newClint;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#clints");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+exports.deleteClint = (req, res, next) => {
+  const id = req.params.id;
+  Home.findOne()
+    .then((data) => {
+      const newClint = data.clints.filter((p) => {
+        return p._id.toString() !== id;
+      });
+      data.clints = newClint;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#clints");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+exports.addPortfilo = (req, res, next) => {
+  const title = req.body.title;
+  const content = req.body.content;
+  const img = req.body.img;
+  Home.findOne()
+    .then((data) => {
+      const newPortfillo = {
+        title: title,
+        content: content,
+        img: img,
+      };
+      data.portfilo.push(newPortfillo);
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#portfillo");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+exports.editPrtfilo = (req, res, next) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const content = req.body.content;
+  const img = req.body.img;
+  Home.findOne()
+    .then((data) => {
+      const newPortfillo = edit(data.portfilo, id, title, content, img, 0, 0);
+      data.portfilo = newPortfillo;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#portfillo");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+exports.deletePortfilo = (req, res, next) => {
+  const id = req.params.id;
+  Home.findOne()
+    .then((data) => {
+      const newportfilo = data.portfilo.filter((p) => {
+        return p._id.toString() !== id;
+      });
+      data.portfilo = newportfilo;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#portfillo");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+exports.postWhyUs = (req, res, next) => {
+  const mession = req.body.mession;
+  const vision = req.body.vision;
+  const princ = req.body.princ;
+  const myObj = {
+    mession: mession,
+    vision: vision,
+    princ: princ,
+  };
+  Home.findOne()
+    .then((data) => {
+      data.whyus = myObj;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#why-us");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 // end home handler
 
 // assest functions
 
-const edit = (arr, id, title, content) => {
-  // this used in edit projects |
+// this used in edit projects | editi servs | edit throwservs | edit clints | edit portfillo
+// how to use >>> 1)arr is must , arr = the array you want to update  2) if element doesn't have one of parm put param = 0 or any value
+const edit = (arr, id, title, content, img, name, website) => {
+  console.log("run");
   const newArr = arr.map((p) => {
     if (p._id.toString() == id) {
-      return { p, title: title, content: content };
+      return {
+        p,
+        title: title,
+        content: content,
+        name: name,
+        website: website,
+        img: img,
+      };
     }
     return p;
   });

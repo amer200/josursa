@@ -1,0 +1,36 @@
+<div class="projects forms d-none" id="clints">
+    <ul class="list-group">
+        <h4>العملاء</h4>
+        <form action="/admin/home/add-clint" id="add-clint-form" method="post">
+            <h4>اضف عميل</h4>
+            <div class="mb-3">
+                <label class="form-label">الاسم</label>
+                <input class="form-control" placeholder="الاسم" id="floatingTextarea" name="name" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">رابط الموقع</label>
+                <input class="form-control" placeholder="رابط الموقع" id="floatingTextarea" name="website" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">الصورة</label>
+                <input class="form-control" placeholder="رابط الصورة" id="floatingTextarea" name="img" />
+            </div>
+            <input type="hidden" id="hide">
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+        <% if(clints){ %>
+            <% clints.forEach( p=> { %>
+                <li class="list-group-item">
+                    <h6>
+                        <%= p.name%>
+                    </h6>
+                    <form action="/admin/home/delelte-clint/<%=p._id%>" method="post"><button type="button"
+                            class="btn btn-danger" onclick="deleteHandeler(this)">حذف</button></form>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#id<%=p._id%>">
+                        تعديل</button>
+                    <%- include('clints-modal', {p:p})%>
+                </li>
+                <%})%>
+                    <%}%>
+    </ul>
+</div>
