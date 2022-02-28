@@ -1,40 +1,56 @@
 const Home = require("../models/home");
-
+const img = require("../models/img");
+const Img = require("../models/img");
 // start home handler
 exports.getHome = (req, res, next) => {
   Home.findOne()
     .then((data) => {
-      if (data) {
-        res.render("admin/admin", {
-          headerMain: data.header.main,
-          headerSub: data.header.sub,
-          aboutTitle: data.about.title,
-          aboutContent: data.about.content,
-          projects: data.projects,
-          servs: data.services,
-          throwservs: data.throwservs,
-          clints: data.clints,
-          portfillo: data.portfilo,
-          whyus: data.whyus,
+      Img.find().then((imgs) => {
+        let categs = [];
+        imgs.forEach((i) => {
+          categs.push(i.categ);
         });
-      } else {
-        res.render("admin/admin", {
-          headerMain: "",
-          headerSub: "",
-          aboutTitle: "",
-          aboutContent: "",
-          projects: [],
-          servs: [],
-          throwservs: [],
-          clints: [],
-          portfillo: [],
-          whyus: {
-            mession: "",
-            vision: "",
-            princ: "",
-          },
-        });
-      }
+        const uniCategs = uniArr(categs);
+        if (data) {
+          res.render("admin/admin", {
+            headerMain: data.header.main,
+            headerSub: data.header.sub,
+            aboutTitle: data.about.title,
+            aboutContent: data.about.content,
+            projects: data.projects,
+            servs: data.services,
+            throwservs: data.throwservs,
+            clints: data.clints,
+            portfillo: data.portfilo,
+            whyus: data.whyus,
+            imgs: imgs,
+            imgsCategs: uniCategs,
+            quality: data.quality,
+            custserv: data.custserv,
+          });
+        } else {
+          res.render("admin/admin", {
+            headerMain: "",
+            headerSub: "",
+            aboutTitle: "",
+            aboutContent: "",
+            projects: [],
+            servs: [],
+            throwservs: [],
+            clints: [],
+            portfillo: [],
+            whyus: {
+              mession: "",
+              vision: "",
+              princ: "",
+            },
+            imgs: imgs,
+            imgsCategs: [],
+            quality: [],
+            custserv: [],
+          });
+        }
+      });
     })
     .catch((err) => {
       res.send(err);
@@ -390,8 +406,72 @@ exports.postWhyUs = (req, res, next) => {
       console.log(err);
     });
 };
-// end home handler
-
+exports.postQuality = (req, res, next) => {
+  const content = req.body.content;
+  const feats = req.body.feats;
+  const img = req.body.img;
+  Home.findOne()
+    .then((data) => {
+      data.quality.content = content;
+      data.quality.feats = feats;
+      data.quality.img = img;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#quality");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+exports.uploadImage = (req, res, next) => {
+  const files = req.files;
+  const categ = req.body.categ;
+  let imgs = [];
+  files.forEach((f) => {
+    const img = {
+      path: f.path,
+      categ: categ,
+    };
+    imgs.push(img);
+  });
+  Img.find();
+  Img.insertMany(imgs)
+    .then((result) => {
+      res.redirect("/admin/home#image");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+exports.postCustserv = (req, res, next) => {
+  const name = req.body.name;
+  const img = req.body.img;
+  const facebook = req.body.facebook;
+  const twitter = req.body.twitter;
+  const insta = req.body.insta;
+  const linkedin = req.body.linkedin;
+  const cust = {
+    name: name,
+    img: img,
+    facebook: facebook,
+    twitter: twitter,
+    insta: insta,
+    linkedin: linkedin,
+  };
+  Home.findOne()
+    .then((data) => {
+      data.custserv = cust;
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#custserv");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+// end image handllers
 // assest functions
 
 // this used in edit projects | editi servs | edit throwservs | edit clints | edit portfillo
@@ -413,3 +493,5 @@ const edit = (arr, id, title, content, img, name, website) => {
   });
   return newArr;
 };
+// remove dubicated value from arr
+const uniArr = (arr) => [...new Set(arr)];

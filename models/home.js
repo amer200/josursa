@@ -42,9 +42,19 @@ const homeSchema = mongoose.Schema({
     vision: String,
     princ: String,
   },
-  techs: [
+  quality: {
+    content: String,
+    feats: [String],
+    img: String,
+  },
+  custserv: [
     {
-      title: String,
+      name: String,
+      img: String,
+      facebook: String,
+      twitter: String,
+      insta: String,
+      linkedin: String,
     },
   ],
 });

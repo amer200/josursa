@@ -1,0 +1,19 @@
+<div class="projects forms d-none" id="imgs">
+    <ul class="list-group">
+        <h4>الصور</h4>
+        <form action="/admin/upload-img" id="add-img-form" method="post" enctype="multipart/form-data">
+            <h4>اضف صور</h4>
+            <div class="mb-3">
+                <label class="form-label">الصورة</label>
+                <input type="file" class="form-control" placeholder="اختر الصور/الصورة" id="floatingTextarea" name="img"
+                    multiple>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">فئة الصور/الصورة</label>
+                <input type="text" class="form-control" placeholder="فئة الصور/الصورة" id="floatingTextarea"
+                    name="categ">
+            </div>
+            <button type="submit" class="btn btn-dark" id="subBtn"> حفظ</button>
+        </form>
+    </ul>
+</div>

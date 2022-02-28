@@ -28,4 +28,10 @@ route.post("/home/edit-portfillo/:id", adminController.editPrtfilo);
 route.post("/home/delelte-portfillo/:id", adminController.deletePortfilo);
 //whyus
 route.post("/home/whyus", adminController.postWhyUs);
+//quality
+route.post("/home/quality", adminController.postQuality);
+//customer service
+route.post("/home/custserv", adminController.postCustserv);
+//image
+route.post("/upload-img", adminController.uploadImage);
 module.exports = route;

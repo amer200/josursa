@@ -1,11 +1,23 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+const multer = require("multer");
 const port = process.env.PORT;
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + file.originalname;
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
+const upload = multer({ storage: storage });
 app.use(express.urlencoded({ extended: true }));
-app.use('/', express.static("public"));
+app.use("/", express.static("public"));
+app.use("/admin/upload-img", upload.array("img", 12));
 app.set("view engine", "ejs");
 
 // routes
