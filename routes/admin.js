@@ -32,6 +32,7 @@ route.post("/home/whyus", adminController.postWhyUs);
 route.post("/home/quality", adminController.postQuality);
 //customer service
 route.post("/home/custserv", adminController.postCustserv);
+route.post("/home/custserv/:id", adminController.editCustServ);
 //image
 route.post("/upload-img", adminController.uploadImage);
 module.exports = route;

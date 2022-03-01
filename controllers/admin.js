@@ -471,13 +471,44 @@ exports.postCustserv = (req, res, next) => {
       console.log(err);
     });
 };
+exports.editCustServ = (req, res, next) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const img = req.body.img;
+  const facebook = req.body.facebook;
+  const twitter = req.body.twitter;
+  const insta = req.body.insta;
+  const linkedin = req.body.linkedin;
+  const cust = {
+    name: name,
+    img: img,
+    facebook: facebook,
+    twitter: twitter,
+    insta: insta,
+    linkedin: linkedin,
+  };
+  console.log(cust);
+  Home.findOne()
+    .then((data) => {
+      const newCusts = data.custserv.filter((c) => {
+        return c.id.toString() !== id;
+      });
+      data.custserv
+      return data.save();
+    })
+    .then((result) => {
+      res.redirect("/admin/home#custserv");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 // end image handllers
 // assest functions
 
 // this used in edit projects | editi servs | edit throwservs | edit clints | edit portfillo
 // how to use >>> 1)arr is must , arr = the array you want to update  2) if element doesn't have one of parm put param = 0 or any value
 const edit = (arr, id, title, content, img, name, website) => {
-  console.log("run");
   const newArr = arr.map((p) => {
     if (p._id.toString() == id) {
       return {
