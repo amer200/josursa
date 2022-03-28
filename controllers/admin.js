@@ -487,7 +487,6 @@ exports.editCustServ = (req, res, next) => {
     insta: insta,
     linkedin: linkedin,
   };
-  console.log(cust);
   Home.findOne()
     .then((data) => {
       const newCusts = data.custserv.filter((c) => {
